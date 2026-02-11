@@ -1,0 +1,14 @@
+@import "tailwindcss";
+
+@theme {
+  --color-brand: #3b82f6;
+}
+
+/* If you want to use @apply, it must be inside a layer */
+@layer base {
+  body {
+    @apply bg-slate-900 text-white;
+    margin: 0;
+    font-family: sans-serif;
+  }
+}
