@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { RefreshCw, Play, Pause, RotateCcw, Code2 } from 'lucide-react';
 import { bubbleSort } from '../algorithms/bubbleSort';
 import { selectionSort } from '../algorithms/selectionSort';
+import { quickSort } from '../algorithms/quickSort';
 
 const algorithmMap = {
   'Bubble Sort': {
@@ -11,6 +12,9 @@ const algorithmMap = {
   },
   'Selection Sort': {
     run: selectionSort,
+  },
+  'Quick Sort': {
+    run: quickSort,
   },
 // Add your algorithm name and function to the run parameter.
 };
@@ -71,7 +75,9 @@ export default function VisualizerPage({ name, codeSnippet }) {
               className={`flex-grow rounded-t-lg transition-colors duration-150 ${
                 item.status === 'comparing' ? 'bg-yellow-400' :
                 item.status === 'swapping' ? 'bg-red-500' :
-                item.status === 'sorted' ? 'bg-green-500' : 'bg-blue-600'
+                item.status === 'sorted' ? 'bg-green-500' :
+                item.status === 'pivot' ? 'bg-purple-500' :
+                'bg-blue-600'
               }`}
               style={{ height: `${(item.value / 400) * 100}%` }} 
             />

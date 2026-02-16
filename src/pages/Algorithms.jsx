@@ -14,6 +14,12 @@ export default function Algorithms() {
       title:"Selection Sort",
       description:"Selection sort repeatedly finds the smallest element in the unsorted part of the array and places it in its correct position. ",
       path: '/visualizer/selection-sort'
+    },
+    {
+      id: "quick-sort",
+      title: "Quick Sort",
+      description: "Quick sort is a highly efficient divide-and-conquer algorithm that picks a 'pivot' and partitions the array around it.",
+      path: '/visualizer/quick-sort'
     }
     // Future algorithms can be added here easily!
   ];
