@@ -139,6 +139,7 @@ const complexityRank = {
 };
 
 export default function Algorithms() {
+
   const [activeFilter, setActiveFilter] = useState('all');
   const [searchText, setSearchText] = useState('');
   const [sortBy, setSortBy] = useState('featured');
@@ -480,6 +481,7 @@ export default function Algorithms() {
             </MotionArticle>
           );
         })}
+
       </div>
 
       {filteredAlgorithms.length === 0 && (

@@ -29,7 +29,7 @@ export const bubbleSort = async (array, setArray, speed, stopSignal, pauseSignal
         arr[j].value = arr[j + 1].value;
         arr[j + 1].value = temp;
 
-        setArray([...arr]);
+        setArray([...arr]);  
         await sleep(speed);
       }
 
