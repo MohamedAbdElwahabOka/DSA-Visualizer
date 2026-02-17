@@ -29,6 +29,7 @@ import { quickSort } from "../algorithms/quickSort";
 import { linearSearch } from "../algorithms/linearSearch";
 import { radixSort } from "../algorithms/radixSort";
 import { heapSort } from "../algorithms/heapSort";
+import { insertionSort } from '../algorithms/insertionSort';
 
 const CPP_KEYWORDS = new Set([
   "break",
@@ -150,6 +151,15 @@ const algorithmMap = {
     space: "O(n+k)",
     description:
       "Radix Sort avoids comparison by creating and distributing elements into buckets according to their radix.",
+  },
+  "Insertion Sort": {
+    run: insertionSort,
+    category: 'Sorting',
+    best: 'O(n)',
+    average: 'O(n^2)',
+    worst: 'O(n^2)',
+    space: 'O(1)',
+    description: 'Insertion Sort builds the final sorted array one item at a time by shifting larger elements to the right.',
   },
   "Heap Sort": {
     run: heapSort,

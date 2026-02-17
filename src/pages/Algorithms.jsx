@@ -100,6 +100,20 @@ const algorithmsCatalog = [
     gradient: 'from-emerald-500/25 via-teal-500/15 to-transparent',
     accent: 'text-emerald-200',
   },
+  {
+    id: 'insertion-sort',
+    title: 'Insertion Sort',
+    description:
+      'Builds a sorted array one item at a time by shifting elements that are greater than the key to the right.',
+    path: '/visualizer/insertion-sort',
+    category: 'sorting',
+    type: 'In-place',
+    complexity: 'O(n^2)',
+    level: 'Beginner',
+    icon: Layers,
+    gradient: 'from-emerald-500/25 via-teal-500/15 to-transparent',
+    accent: 'text-emerald-200',
+  },
 ];
 
 const filterTabs = [
