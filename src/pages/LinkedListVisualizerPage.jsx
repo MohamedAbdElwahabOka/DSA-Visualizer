@@ -491,8 +491,8 @@ export default function LinkedListVisualizerPage() {
         </div>
       </MotionSection>
 
-      <div className="mt-6 grid grid-cols-1 gap-6 xl:grid-cols-[350px_1fr]">
-        <aside className="rounded-3xl border border-white/10 bg-slate-800/35 p-5 backdrop-blur xl:sticky xl:top-24">
+      <div className="mt-6 grid grid-cols-1 items-start gap-6 xl:grid-cols-[350px_minmax(0,1fr)] xl:items-stretch">
+        <aside className="flex h-full flex-col rounded-3xl border border-white/10 bg-slate-800/35 p-5 backdrop-blur">
           <div className="mb-5 flex items-center gap-2">
             <Binary size={18} className="text-cyan-300" />
             <h2 className="text-sm font-bold uppercase tracking-widest text-white">
@@ -500,7 +500,7 @@ export default function LinkedListVisualizerPage() {
             </h2>
           </div>
 
-          <div className="space-y-4">
+          <div className="flex flex-1 flex-col gap-4">
             <div className="rounded-2xl bg-white/5 p-3">
               <label className="mb-2 flex items-center justify-between text-xs uppercase text-slate-400">
                 <span>Algorithm</span>
@@ -580,14 +580,14 @@ export default function LinkedListVisualizerPage() {
               <MotionButton
                 whileHover={{ scale: 1.02 }}
                 onClick={handleStart}
-                className="flex w-full items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-blue-600 to-cyan-500 py-3.5 font-bold text-white shadow-lg"
+                className="mt-auto flex w-full items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-blue-600 to-cyan-500 py-3.5 font-bold text-white shadow-lg"
               >
                 <Play size={18} fill="currentColor" /> Start
               </MotionButton>
             ) : (
               <MotionButton
                 onClick={isPaused ? handleResume : handlePause}
-                className={`flex w-full items-center justify-center gap-2 rounded-2xl py-3.5 font-bold text-white ${isPaused ? 'bg-emerald-600' : 'bg-amber-500 text-slate-900'}`}
+                className={`mt-auto flex w-full items-center justify-center gap-2 rounded-2xl py-3.5 font-bold text-white ${isPaused ? 'bg-emerald-600' : 'bg-amber-500 text-slate-900'}`}
               >
                 {isPaused ? (
                   <Play size={18} fill="currentColor" />
@@ -600,7 +600,7 @@ export default function LinkedListVisualizerPage() {
           </div>
         </aside>
 
-        <section className="rounded-3xl border border-white/10 bg-slate-800/35 p-4 shadow-2xl backdrop-blur sm:p-6">
+        <section className="min-w-0 h-full rounded-3xl border border-white/10 bg-slate-800/35 p-4 shadow-2xl backdrop-blur sm:p-6">
           <div className="mb-4">
             <p className="text-xs font-bold uppercase tracking-widest text-slate-300">
               Node Graph
@@ -610,8 +610,9 @@ export default function LinkedListVisualizerPage() {
             </p>
           </div>
 
-          <div className="overflow-x-auto overflow-y-visible px-1 pb-3 pt-6">
-            <div className="flex min-w-max items-start gap-3 pr-4">
+          <div className="min-w-0 rounded-2xl border border-white/10 bg-slate-900/45">
+            <div className="ll-scrollbar h-[170px] w-full max-w-full overflow-x-auto overflow-y-hidden px-2 pb-3 pt-7">
+              <div className="flex h-full min-w-max items-start gap-3 pr-4">
               {nodeRenderOrder.map((nodeIndex, orderIndex) => {
                 const node = nodes[nodeIndex];
                 if (!node) return null;
@@ -649,58 +650,63 @@ export default function LinkedListVisualizerPage() {
                       </p>
                     </MotionDiv>
                     {orderIndex < nodeRenderOrder.length - 1 && (
-                      <span className="text-sm font-bold text-slate-500">-&gt;</span>
+                      <span className="self-center text-sm font-bold text-slate-500">-&gt;</span>
                     )}
                   </div>
                 );
               })}
+              </div>
             </div>
           </div>
 
-          <div className="mt-2 flex flex-wrap items-center gap-2">
-            {pointerSummary.length === 0 ? (
-              <span className="rounded-lg border border-white/10 bg-white/5 px-2 py-1 text-xs text-slate-400">
-                No active pointers
-              </span>
-            ) : (
-              pointerSummary.map((pointer) => (
-                <span
-                  key={pointer.key}
-                  className="rounded-lg border border-cyan-400/30 bg-cyan-500/10 px-2.5 py-1 text-xs font-semibold uppercase tracking-wide text-cyan-100"
-                >
-                  {pointer.label}: {pointer.value}
+          <div className="ll-scrollbar mt-2 w-full max-w-full overflow-x-auto">
+            <div className="flex min-w-max items-center gap-2 pb-1">
+              {pointerSummary.length === 0 ? (
+                <span className="rounded-lg border border-white/10 bg-white/5 px-2 py-1 text-xs text-slate-400">
+                  No active pointers
                 </span>
-              ))
-            )}
+              ) : (
+                pointerSummary.map((pointer) => (
+                  <span
+                    key={pointer.key}
+                    className="rounded-lg border border-cyan-400/30 bg-cyan-500/10 px-2.5 py-1 text-xs font-semibold uppercase tracking-wide text-cyan-100"
+                  >
+                    {pointer.label}: {pointer.value}
+                  </span>
+                ))
+              )}
+            </div>
           </div>
 
           <div className="mt-6 rounded-2xl border border-white/10 bg-slate-900/60 p-4">
             <p className="text-xs font-bold uppercase tracking-widest text-slate-300">
               Traversal From Head
             </p>
-            <div className="mt-3 flex flex-wrap items-center gap-2 text-sm">
-              {listTraversal.order.length === 0 ? (
-                <span className="text-slate-400">null</span>
-              ) : (
-                <>
-                  {listTraversal.order.map((index, orderIndex) => (
-                    <div key={`${nodes[index].id}-order`} className="flex items-center gap-2">
-                      <span className="rounded-lg border border-cyan-400/35 bg-cyan-500/10 px-2.5 py-1 font-semibold text-cyan-100">
-                        {nodes[index].value}
+            <div className="ll-scrollbar mt-3 w-full max-w-full overflow-x-auto">
+              <div className="flex min-w-max items-center gap-2 pb-1 text-sm">
+                {listTraversal.order.length === 0 ? (
+                  <span className="text-slate-400">null</span>
+                ) : (
+                  <>
+                    {listTraversal.order.map((index, orderIndex) => (
+                      <div key={`${nodes[index].id}-order`} className="flex items-center gap-2">
+                        <span className="rounded-lg border border-cyan-400/35 bg-cyan-500/10 px-2.5 py-1 font-semibold text-cyan-100">
+                          {nodes[index].value}
+                        </span>
+                        {orderIndex < listTraversal.order.length - 1 && (
+                          <span className="text-slate-400">-&gt;</span>
+                        )}
+                      </div>
+                    ))}
+                    <span className="text-slate-500">-&gt; null</span>
+                    {listTraversal.hasCycle && (
+                      <span className="rounded-full border border-rose-400/35 bg-rose-500/15 px-2 py-0.5 text-xs font-semibold text-rose-100">
+                        cycle detected
                       </span>
-                      {orderIndex < listTraversal.order.length - 1 && (
-                        <span className="text-slate-400">-&gt;</span>
-                      )}
-                    </div>
-                  ))}
-                  <span className="text-slate-500">-&gt; null</span>
-                  {listTraversal.hasCycle && (
-                    <span className="rounded-full border border-rose-400/35 bg-rose-500/15 px-2 py-0.5 text-xs font-semibold text-rose-100">
-                      cycle detected
-                    </span>
-                  )}
-                </>
-              )}
+                    )}
+                  </>
+                )}
+              </div>
             </div>
           </div>
         </section>
