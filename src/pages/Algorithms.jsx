@@ -129,6 +129,20 @@ const algorithmsCatalog = [
     gradient: 'from-violet-500/25 via-blue-500/15 to-transparent',
     accent: 'text-violet-200',
   },
+  {
+    id: 'depth-first-search',
+    title: 'Depth First Search',
+    description:
+      'Traverse a tree or graph by exploring as far as possible along each branch before backtracking.',
+    path: '/visualizer/dfs',
+    category: 'searching', // or 'graph' if you prefer, but sticking to existing categories
+    type: 'Traversal',
+    complexity: 'O(V+E)', // or O(n) for tree
+    level: 'Intermediate',
+    icon: Binary,
+    gradient: 'from-violet-500/25 via-fuchsia-500/15 to-transparent',
+    accent: 'text-violet-200',
+  },
 ];
 
 const filterTabs = [

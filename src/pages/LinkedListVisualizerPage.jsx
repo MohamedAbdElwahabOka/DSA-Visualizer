@@ -1,5 +1,5 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { motion } from 'framer-motion';
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { motion } from "framer-motion";
 import {
   Activity,
   Binary,
@@ -12,8 +12,13 @@ import {
   Play,
   RotateCcw,
   Shuffle,
-} from 'lucide-react';
-import { middleNodeCPP, reverseLinkedListCPP, middleNodePython, reverseLinkedListPython } from '../algorithms/linkedList';
+} from "lucide-react";
+import {
+  middleNodeCPP,
+  reverseLinkedListCPP,
+  middleNodePython,
+  reverseLinkedListPython,
+} from "../algorithms/linkedList";
 
 const EMPTY_MARKERS = {
   head: null,
@@ -26,91 +31,114 @@ const EMPTY_MARKERS = {
 };
 
 const runStatusStyleMap = {
-  Idle: 'border-white/15 bg-white/5 text-slate-200',
-  Running: 'border-cyan-400/30 bg-cyan-500/10 text-cyan-100',
-  Paused: 'border-amber-400/30 bg-amber-500/10 text-amber-100',
-  Completed: 'border-emerald-400/30 bg-emerald-500/10 text-emerald-100',
+  Idle: "border-white/15 bg-white/5 text-slate-200",
+  Running: "border-cyan-400/30 bg-cyan-500/10 text-cyan-100",
+  Paused: "border-amber-400/30 bg-amber-500/10 text-amber-100",
+  Completed: "border-emerald-400/30 bg-emerald-500/10 text-emerald-100",
 };
 
 const markerLabels = {
-  head: 'head',
-  current: 'curr',
-  prev: 'prev',
-  next: 'next',
-  slow: 'slow',
-  fast: 'fast',
-  middle: 'mid',
+  head: "head",
+  current: "curr",
+  prev: "prev",
+  next: "next",
+  slow: "slow",
+  fast: "fast",
+  middle: "mid",
 };
 
 const linkedListAlgorithms = {
   reverse: {
-    title: 'Reverse Linked List',
+    title: "Reverse Linked List",
     description:
-      'Iteratively reverse each next pointer using prev, current, and next pointers.',
-    complexity: 'O(n)',
-    space: 'O(1)',
+      "Iteratively reverse each next pointer using prev, current, and next pointers.",
+    complexity: "O(n)",
+    space: "O(1)",
     cppSnippet: reverseLinkedListCPP,
     pythonSnippet: reverseLinkedListPython,
   },
   middle: {
-    title: 'Middle Node (Slow/Fast)',
+    title: "Middle Node (Slow/Fast)",
     description:
-      'Move slow by one step and fast by two steps until fast reaches the tail.',
-    complexity: 'O(n)',
-    space: 'O(1)',
+      "Move slow by one step and fast by two steps until fast reaches the tail.",
+    complexity: "O(n)",
+    space: "O(1)",
     cppSnippet: middleNodeCPP,
     pythonSnippet: middleNodePython,
   },
 };
 
 const nodeStatusClassMap = {
-  default: 'border-blue-400/30 bg-blue-500/10 text-blue-100',
-  current: 'border-amber-400/45 bg-amber-500/20 text-amber-100',
-  reversed: 'border-emerald-400/45 bg-emerald-500/20 text-emerald-100',
-  slow: 'border-cyan-400/45 bg-cyan-500/20 text-cyan-100',
-  fast: 'border-fuchsia-400/45 bg-fuchsia-500/20 text-fuchsia-100',
-  middle: 'border-violet-400/45 bg-violet-500/20 text-violet-100',
+  default: "border-blue-400/30 bg-blue-500/10 text-blue-100",
+  current: "border-amber-400/45 bg-amber-500/20 text-amber-100",
+  reversed: "border-emerald-400/45 bg-emerald-500/20 text-emerald-100",
+  slow: "border-cyan-400/45 bg-cyan-500/20 text-cyan-100",
+  fast: "border-fuchsia-400/45 bg-fuchsia-500/20 text-fuchsia-100",
+  middle: "border-violet-400/45 bg-violet-500/20 text-violet-100",
 };
 
 const CODE_KEYWORDS = new Set([
-  'break',
-  'case',
-  'class',
-  'const',
-  'continue',
-  'default',
-  'do',
-  'else',
-  'enum',
-  'for',
-  'if',
-  'new',
-  'return',
-  'struct',
-  'switch',
-  'template',
-  'this',
-  'throw',
-  'typedef',
-  'using',
-  'virtual',
-  'while',
-  'def', 'print', 'len', 'range', 'in', 'and', 'or', 'not', 'is', 'elif', 'try', 'except', 'finally', 'with', 'as', 'pass', 'None', 'True', 'False'
+  "break",
+  "case",
+  "class",
+  "const",
+  "continue",
+  "default",
+  "do",
+  "else",
+  "enum",
+  "for",
+  "if",
+  "new",
+  "return",
+  "struct",
+  "switch",
+  "template",
+  "this",
+  "throw",
+  "typedef",
+  "using",
+  "virtual",
+  "while",
+  "def",
+  "print",
+  "len",
+  "range",
+  "in",
+  "and",
+  "or",
+  "not",
+  "is",
+  "elif",
+  "try",
+  "except",
+  "finally",
+  "with",
+  "as",
+  "pass",
+  "None",
+  "True",
+  "False",
 ]);
 
 const CODE_TYPES = new Set([
-  'bool',
-  'char',
-  'double',
-  'float',
-  'int',
-  'long',
-  'short',
-  'void',
-  'string',
-  'vector',
-  'std',
-  'list', 'dict', 'set', 'tuple', 'map', 'input'
+  "bool",
+  "char",
+  "double",
+  "float",
+  "int",
+  "long",
+  "short",
+  "void",
+  "string",
+  "vector",
+  "std",
+  "list",
+  "dict",
+  "set",
+  "tuple",
+  "map",
+  "input",
 ]);
 
 const TOKEN_REGEX =
@@ -129,20 +157,20 @@ function getNodeStatusClass(status) {
 }
 
 function getCppTokenClass(token) {
-  if (token.startsWith('//') || token.startsWith('/*'))
-    return 'text-emerald-400/80 italic';
-  if (token.startsWith('"')) return 'text-amber-300';
-  if (token.trim().startsWith('#')) return 'text-fuchsia-400';
-  if (/^\d/.test(token)) return 'text-orange-300';
-  if (CODE_TYPES.has(token)) return 'text-cyan-300 font-bold';
-  if (CODE_KEYWORDS.has(token)) return 'text-sky-300 font-bold';
-  return 'text-slate-100';
+  if (token.startsWith("//") || token.startsWith("/*"))
+    return "text-emerald-400/80 italic";
+  if (token.startsWith('"')) return "text-amber-300";
+  if (token.trim().startsWith("#")) return "text-fuchsia-400";
+  if (/^\d/.test(token)) return "text-orange-300";
+  if (CODE_TYPES.has(token)) return "text-cyan-300 font-bold";
+  if (CODE_KEYWORDS.has(token)) return "text-sky-300 font-bold";
+  return "text-slate-100";
 }
 
 function renderHighlightedCode(code) {
   const nodes = [];
   let lastIndex = 0;
-  const safeCode = code || '';
+  const safeCode = code || "";
 
   for (const match of safeCode.matchAll(TOKEN_REGEX)) {
     const token = match[0];
@@ -165,7 +193,7 @@ function createLinkedListState(size) {
   const nodes = Array.from({ length: size }, (_, index) => ({
     id: `${stamp}-${index}-${Math.floor(Math.random() * 1000000)}`,
     value: getRandomValue(),
-    status: 'default',
+    status: "default",
   }));
   const nextLinks = Array.from({ length: size }, (_, index) =>
     index + 1 < size ? index + 1 : null,
@@ -179,10 +207,22 @@ function createLinkedListState(size) {
 }
 
 function getFocusPointer(markers, nodes) {
-  const priority = ['current', 'head', 'slow', 'fast', 'middle', 'prev', 'next'];
+  const priority = [
+    "current",
+    "head",
+    "slow",
+    "fast",
+    "middle",
+    "prev",
+    "next",
+  ];
   for (const key of priority) {
     const pointerIndex = markers[key];
-    if (pointerIndex !== null && pointerIndex !== undefined && nodes[pointerIndex]) {
+    if (
+      pointerIndex !== null &&
+      pointerIndex !== undefined &&
+      nodes[pointerIndex]
+    ) {
       return {
         key,
         label: markerLabels[key],
@@ -205,14 +245,16 @@ export default function LinkedListVisualizerPage() {
   });
   const [listSize, setListSize] = useState(7);
   const [speed, setSpeed] = useState(280);
-  const [selectedAlgorithm, setSelectedAlgorithm] = useState('reverse');
-  const [runStatus, setRunStatus] = useState('Idle');
+  const [selectedAlgorithm, setSelectedAlgorithm] = useState("reverse");
+  const [runStatus, setRunStatus] = useState("Idle");
   const [isRunning, setIsRunning] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
   const [stepCount, setStepCount] = useState(0);
-  const [statusMessage, setStatusMessage] = useState('Generate data and start an algorithm run.');
-  const [copyState, setCopyState] = useState('idle');
-  const [selectedLanguage, setSelectedLanguage] = useState('C++');
+  const [statusMessage, setStatusMessage] = useState(
+    "Generate data and start an algorithm run.",
+  );
+  const [copyState, setCopyState] = useState("idle");
+  const [selectedLanguage, setSelectedLanguage] = useState("C++");
 
   const stopSignal = useRef(false);
   const pauseSignal = useRef(false);
@@ -224,7 +266,10 @@ export default function LinkedListVisualizerPage() {
   const MotionDiv = motion.div;
 
   const activeAlgorithm = linkedListAlgorithms[selectedAlgorithm];
-  const activeCodeSnippet = selectedLanguage === 'C++' ? activeAlgorithm.cppSnippet : activeAlgorithm.pythonSnippet;
+  const activeCodeSnippet =
+    selectedLanguage === "C++"
+      ? activeAlgorithm.cppSnippet
+      : activeAlgorithm.pythonSnippet;
 
   const waitWithControl = useCallback(async (durationMs) => {
     let elapsed = 0;
@@ -255,7 +300,7 @@ export default function LinkedListVisualizerPage() {
     setNodes((currentNodes) =>
       currentNodes.map((node) => ({
         ...node,
-        status: 'default',
+        status: "default",
       })),
     );
   }, []);
@@ -269,9 +314,9 @@ export default function LinkedListVisualizerPage() {
       setNextLinks(nextGraph.nextLinks);
       setHeadIndex(nextGraph.headIndex);
       setMarkers({ ...EMPTY_MARKERS, head: nextGraph.headIndex });
-      setRunStatus('Idle');
+      setRunStatus("Idle");
       setStepCount(0);
-      setStatusMessage('New linked list generated.');
+      setStatusMessage("New linked list generated.");
     },
     [hardStopRun],
   );
@@ -280,13 +325,13 @@ export default function LinkedListVisualizerPage() {
     hardStopRun();
     resetNodeHighlights();
     setMarkers({ ...EMPTY_MARKERS, head: headIndex });
-    setRunStatus('Idle');
+    setRunStatus("Idle");
     setStepCount(0);
-    setStatusMessage('Pointers and highlights reset.');
+    setStatusMessage("Pointers and highlights reset.");
   }, [hardStopRun, headIndex, resetNodeHighlights]);
 
   const runReverseLinkedList = useCallback(async () => {
-    let workingNodes = nodes.map((node) => ({ ...node, status: 'default' }));
+    let workingNodes = nodes.map((node) => ({ ...node, status: "default" }));
     let workingLinks = [...nextLinks];
     let prev = null;
     let current = headIndex;
@@ -298,11 +343,11 @@ export default function LinkedListVisualizerPage() {
       setStepCount(localStep);
 
       workingNodes = workingNodes.map((node, index) => {
-        if (index === current) return { ...node, status: 'current' };
-        if (index === prev) return { ...node, status: 'reversed' };
-        return node.status === 'reversed'
+        if (index === current) return { ...node, status: "current" };
+        if (index === prev) return { ...node, status: "reversed" };
+        return node.status === "reversed"
           ? node
-          : { ...node, status: 'default' };
+          : { ...node, status: "default" };
       });
 
       setNodes([...workingNodes]);
@@ -324,7 +369,7 @@ export default function LinkedListVisualizerPage() {
 
       workingLinks[current] = prev;
       workingNodes = workingNodes.map((node, index) => {
-        if (index === current) return { ...node, status: 'reversed' };
+        if (index === current) return { ...node, status: "reversed" };
         return node;
       });
 
@@ -342,7 +387,7 @@ export default function LinkedListVisualizerPage() {
 
     const completedNodes = workingNodes.map((node) => ({
       ...node,
-      status: 'reversed',
+      status: "reversed",
     }));
 
     setNodes(completedNodes);
@@ -351,7 +396,7 @@ export default function LinkedListVisualizerPage() {
       ...EMPTY_MARKERS,
       head: prev,
     });
-    setStatusMessage('Reversal complete. Head now points to the old tail.');
+    setStatusMessage("Reversal complete. Head now points to the old tail.");
 
     return true;
   }, [headIndex, nextLinks, nodes, speed, waitWithControl]);
@@ -360,7 +405,7 @@ export default function LinkedListVisualizerPage() {
     if (headIndex === null) return true;
 
     const workingLinks = [...nextLinks];
-    const workingNodes = nodes.map((node) => ({ ...node, status: 'default' }));
+    const workingNodes = nodes.map((node) => ({ ...node, status: "default" }));
     let slow = headIndex;
     let fast = headIndex;
     let localStep = 0;
@@ -371,9 +416,9 @@ export default function LinkedListVisualizerPage() {
 
       const currentFast = fast;
       workingNodes.forEach((node, index) => {
-        if (index === slow) node.status = 'slow';
-        else if (index === currentFast) node.status = 'fast';
-        else node.status = 'default';
+        if (index === slow) node.status = "slow";
+        else if (index === currentFast) node.status = "fast";
+        else node.status = "default";
       });
 
       setNodes([...workingNodes]);
@@ -396,7 +441,7 @@ export default function LinkedListVisualizerPage() {
     }
 
     workingNodes.forEach((node, index) => {
-      node.status = index === slow ? 'middle' : 'default';
+      node.status = index === slow ? "middle" : "default";
     });
 
     setNodes([...workingNodes]);
@@ -417,11 +462,11 @@ export default function LinkedListVisualizerPage() {
     pauseSignal.current = false;
     setIsRunning(true);
     setIsPaused(false);
-    setRunStatus('Running');
+    setRunStatus("Running");
     setStepCount(0);
 
     const completed =
-      selectedAlgorithm === 'reverse'
+      selectedAlgorithm === "reverse"
         ? await runReverseLinkedList()
         : await runMiddleNode();
 
@@ -429,41 +474,47 @@ export default function LinkedListVisualizerPage() {
 
     setIsRunning(false);
     setIsPaused(false);
-    setRunStatus(completed ? 'Completed' : 'Idle');
-  }, [isRunning, nodes.length, runMiddleNode, runReverseLinkedList, selectedAlgorithm]);
+    setRunStatus(completed ? "Completed" : "Idle");
+  }, [
+    isRunning,
+    nodes.length,
+    runMiddleNode,
+    runReverseLinkedList,
+    selectedAlgorithm,
+  ]);
 
   const handlePause = useCallback(() => {
     if (!isRunning || isPaused) return;
     pauseSignal.current = true;
     setIsPaused(true);
-    setRunStatus('Paused');
+    setRunStatus("Paused");
   }, [isPaused, isRunning]);
 
   const handleResume = useCallback(() => {
     if (!isRunning || !isPaused) return;
     pauseSignal.current = false;
     setIsPaused(false);
-    setRunStatus('Running');
+    setRunStatus("Running");
   }, [isPaused, isRunning]);
 
   const handleCopyCode = useCallback(async () => {
     if (!navigator?.clipboard) return;
     try {
       await navigator.clipboard.writeText(activeCodeSnippet);
-      setCopyState('copied');
-      setTimeout(() => setCopyState('idle'), 1400);
+      setCopyState("copied");
+      setTimeout(() => setCopyState("idle"), 1400);
     } catch {
-      setCopyState('idle');
+      setCopyState("idle");
     }
   }, [activeCodeSnippet]);
 
   const handleDownloadCode = useCallback(() => {
-    const extension = selectedLanguage === 'C++' ? '.cpp' : '.py';
-    const blob = new Blob([activeCodeSnippet], { type: 'text/plain' });
+    const extension = selectedLanguage === "C++" ? ".cpp" : ".py";
+    const blob = new Blob([activeCodeSnippet], { type: "text/plain" });
     const url = URL.createObjectURL(blob);
-    const link = document.createElement('a');
+    const link = document.createElement("a");
     link.href = url;
-    link.download = `${activeAlgorithm.title.replace(/\s+/g, '')}${extension}`;
+    link.download = `${activeAlgorithm.title.replace(/\s+/g, "")}${extension}`;
     link.click();
     URL.revokeObjectURL(url);
   }, [activeCodeSnippet, activeAlgorithm.title, selectedLanguage]);
@@ -516,13 +567,15 @@ export default function LinkedListVisualizerPage() {
     if (!viewport || !focusedNode) return;
 
     const targetLeft =
-      focusedNode.offsetLeft - viewport.clientWidth / 2 + focusedNode.clientWidth / 2;
+      focusedNode.offsetLeft -
+      viewport.clientWidth / 2 +
+      focusedNode.clientWidth / 2;
     const maxLeft = Math.max(0, viewport.scrollWidth - viewport.clientWidth);
     const clampedLeft = Math.min(maxLeft, Math.max(0, targetLeft));
 
     viewport.scrollTo({
       left: clampedLeft,
-      behavior: isRunning ? 'smooth' : 'auto',
+      behavior: isRunning ? "smooth" : "auto",
     });
   }, [focusIndex, isRunning]);
 
@@ -560,7 +613,9 @@ export default function LinkedListVisualizerPage() {
                 <p className="text-[11px] uppercase tracking-wider text-slate-400">
                   Nodes
                 </p>
-                <p className="mt-1 text-sm font-semibold text-white">{nodes.length}</p>
+                <p className="mt-1 text-sm font-semibold text-white">
+                  {nodes.length}
+                </p>
               </div>
               <div className="rounded-xl border border-white/10 bg-white/5 p-3">
                 <p className="text-[11px] uppercase tracking-wider text-slate-400">
@@ -582,7 +637,9 @@ export default function LinkedListVisualizerPage() {
                 <p className="text-[11px] uppercase tracking-wider text-slate-400">
                   Steps
                 </p>
-                <p className="mt-1 text-sm font-semibold text-emerald-200">{stepCount}</p>
+                <p className="mt-1 text-sm font-semibold text-emerald-200">
+                  {stepCount}
+                </p>
               </div>
             </div>
           </div>
@@ -594,12 +651,14 @@ export default function LinkedListVisualizerPage() {
             <div className="mt-4 space-y-3">
               <div className="rounded-xl bg-white/5 p-3">
                 <p className="text-[11px] text-slate-400">Current Step</p>
-                <p className="text-sm font-semibold text-white">{statusMessage}</p>
+                <p className="text-sm font-semibold text-white">
+                  {statusMessage}
+                </p>
               </div>
               <div className="rounded-xl bg-white/5 p-3">
                 <p className="text-[11px] text-slate-400">Head Value</p>
                 <p className="text-lg font-bold text-cyan-100">
-                  {headIndex === null ? 'null' : nodes[headIndex]?.value}
+                  {headIndex === null ? "null" : nodes[headIndex]?.value}
                 </p>
               </div>
               <div className="rounded-xl bg-white/5 p-3">
@@ -707,14 +766,14 @@ export default function LinkedListVisualizerPage() {
             ) : (
               <MotionButton
                 onClick={isPaused ? handleResume : handlePause}
-                className={`mt-auto flex w-full items-center justify-center gap-2 rounded-2xl py-3.5 font-bold text-white ${isPaused ? 'bg-emerald-600' : 'bg-amber-500 text-slate-900'}`}
+                className={`mt-auto flex w-full items-center justify-center gap-2 rounded-2xl py-3.5 font-bold text-white ${isPaused ? "bg-emerald-600" : "bg-amber-500 text-slate-900"}`}
               >
                 {isPaused ? (
                   <Play size={18} fill="currentColor" />
                 ) : (
                   <Pause size={18} fill="currentColor" />
                 )}
-                {isPaused ? 'Resume' : 'Pause'}
+                {isPaused ? "Resume" : "Pause"}
               </MotionButton>
             )}
           </div>
@@ -754,13 +813,21 @@ export default function LinkedListVisualizerPage() {
                     >
                       <MotionDiv
                         layout
-                        transition={{ type: 'spring', stiffness: 250, damping: 28 }}
+                        transition={{
+                          type: "spring",
+                          stiffness: 250,
+                          damping: 28,
+                        }}
                         className={`relative mt-2 min-w-[112px] rounded-xl border px-3 py-3 text-center shadow-lg ${getNodeStatusClass(node.status)}`}
                       >
                         {focusPointer?.index === nodeIndex && (
                           <motion.div
                             layoutId="active-pointer-focus"
-                            transition={{ type: 'spring', stiffness: 320, damping: 30 }}
+                            transition={{
+                              type: "spring",
+                              stiffness: 320,
+                              damping: 30,
+                            }}
                             className="pointer-events-none absolute -inset-1 rounded-xl border-2 border-cyan-300/80 shadow-[0_0_0_6px_rgba(34,211,238,0.16)]"
                           />
                         )}
@@ -781,12 +848,16 @@ export default function LinkedListVisualizerPage() {
                         </p>
                         <p className="mt-1 text-xl font-bold">{node.value}</p>
                         <p className="mt-1 text-[10px] font-semibold uppercase tracking-wide text-slate-100/85">
-                          next:{' '}
-                          {nextIndex === null ? 'null' : nodes[nextIndex]?.value ?? 'null'}
+                          next:{" "}
+                          {nextIndex === null
+                            ? "null"
+                            : (nodes[nextIndex]?.value ?? "null")}
                         </p>
                       </MotionDiv>
                       {orderIndex < nodeRenderOrder.length - 1 && (
-                        <span className="self-center text-sm font-bold text-slate-500">-&gt;</span>
+                        <span className="self-center text-sm font-bold text-slate-500">
+                          -&gt;
+                        </span>
                       )}
                     </div>
                   );
@@ -805,10 +876,11 @@ export default function LinkedListVisualizerPage() {
                 pointerSummary.map((pointer) => (
                   <span
                     key={pointer.key}
-                    className={`rounded-lg px-2.5 py-1 text-xs font-semibold uppercase tracking-wide ${focusPointer?.key === pointer.key
-                      ? 'border border-amber-400/50 bg-amber-500/20 text-amber-100'
-                      : 'border border-cyan-400/30 bg-cyan-500/10 text-cyan-100'
-                      }`}
+                    className={`rounded-lg px-2.5 py-1 text-xs font-semibold uppercase tracking-wide ${
+                      focusPointer?.key === pointer.key
+                        ? "border border-amber-400/50 bg-amber-500/20 text-amber-100"
+                        : "border border-cyan-400/30 bg-cyan-500/10 text-cyan-100"
+                    }`}
                   >
                     {pointer.label}: {pointer.value}
                   </span>
@@ -828,7 +900,10 @@ export default function LinkedListVisualizerPage() {
                 ) : (
                   <>
                     {listTraversal.order.map((index, orderIndex) => (
-                      <div key={`${nodes[index].id}-order`} className="flex items-center gap-2">
+                      <div
+                        key={`${nodes[index].id}-order`}
+                        className="flex items-center gap-2"
+                      >
                         <span className="rounded-lg border border-cyan-400/35 bg-cyan-500/10 px-2.5 py-1 font-semibold text-cyan-100">
                           {nodes[index].value}
                         </span>
@@ -860,7 +935,11 @@ export default function LinkedListVisualizerPage() {
             </span>
             <div className="ml-4 flex rounded-lg bg-white/5 p-1 border border-white/10">
               {["C++", "Python"].map((lang) => (
-                <button key={lang} onClick={() => setSelectedLanguage(lang)} className={`px-3 py-1 text-[10px] font-bold rounded-md transition-all ${selectedLanguage === lang ? "bg-blue-600 text-white" : "text-slate-400 hover:text-white"}`}>
+                <button
+                  key={lang}
+                  onClick={() => setSelectedLanguage(lang)}
+                  className={`px-3 py-1 text-[10px] font-bold rounded-md transition-all ${selectedLanguage === lang ? "bg-blue-600 text-white" : "text-slate-400 hover:text-white"}`}
+                >
                   {lang}
                 </button>
               ))}
@@ -871,12 +950,12 @@ export default function LinkedListVisualizerPage() {
               onClick={handleCopyCode}
               className="flex items-center gap-2 rounded-lg border border-white/10 bg-white/5 px-4 py-2 text-xs font-bold text-slate-200 transition-colors hover:bg-white/10"
             >
-              {copyState === 'copied' ? (
+              {copyState === "copied" ? (
                 <CheckCheck size={14} className="text-emerald-400" />
               ) : (
                 <Copy size={14} />
               )}
-              {copyState === 'copied' ? 'Copied' : 'Copy'}
+              {copyState === "copied" ? "Copied" : "Copy"}
             </button>
             <button
               onClick={handleDownloadCode}
@@ -889,12 +968,17 @@ export default function LinkedListVisualizerPage() {
         <div className="ll-scrollbar max-h-[500px] overflow-auto bg-[#020617] p-6 font-code text-sm leading-relaxed">
           <pre>
             <code>
-              {activeCodeSnippet.split('\n').map((line, index) => (
-                <div key={`${selectedAlgorithm}-line-${index}`} className="flex rounded px-2 hover:bg-white/5">
+              {activeCodeSnippet.split("\n").map((line, index) => (
+                <div
+                  key={`${selectedAlgorithm}-line-${index}`}
+                  className="flex rounded px-2 hover:bg-white/5"
+                >
                   <span className="w-8 shrink-0 select-none pr-4 text-right text-xs text-slate-600">
                     {index + 1}
                   </span>
-                  <span className="text-slate-300">{renderHighlightedCode(line)}</span>
+                  <span className="text-slate-300">
+                    {renderHighlightedCode(line)}
+                  </span>
                 </div>
               ))}
             </code>
