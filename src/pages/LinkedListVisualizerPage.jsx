@@ -23,6 +23,7 @@ import {
   reverseLinkedListJava, // New Import
 } from "../algorithms/linkedList";
 import { renderHighlightedCode } from "../utils/codeHighlight";
+import { useKeyboardShortcuts } from "../hooks/useKeyboardShortcuts";
 
 const EMPTY_MARKERS = {
   head: null,
@@ -369,6 +370,24 @@ export default function LinkedListVisualizerPage() {
     selectedAlgorithm,
   ]);
 
+  useKeyboardShortcuts({
+    onSpace: () => {
+      if (isRunning) {
+        if (isPaused) {
+          handleResume();
+        } else {
+          handlePause();
+        }
+      } else {
+        handleStart();
+      }
+    },
+    onReset: handleReset,
+    onNew: () => generateNewList(listSize),
+    onSpeedUp: () => setSpeed((s) => Math.max(80, s - 50)),
+    onSpeedDown: () => setSpeed((s) => Math.min(600, s + 50)),
+  });
+
   const handlePause = useCallback(() => {
     if (!isRunning || isPaused) return;
     pauseSignal.current = true;
@@ -480,7 +499,7 @@ export default function LinkedListVisualizerPage() {
               </div>
             </div>
             <div className="mt-5 grid grid-cols-2 gap-3 sm:grid-cols-4 text-center">
-              {[ { label: "Nodes", val: nodes.length, color: "text-white" }, { label: "Time", val: activeAlgorithm.complexity, color: "text-cyan-200" }, { label: "Space", val: activeAlgorithm.space, color: "text-blue-100" }, { label: "Steps", val: stepCount, color: "text-emerald-200" } ].map((stat) => (
+              {[{ label: "Nodes", val: nodes.length, color: "text-white" }, { label: "Time", val: activeAlgorithm.complexity, color: "text-cyan-200" }, { label: "Space", val: activeAlgorithm.space, color: "text-blue-100" }, { label: "Steps", val: stepCount, color: "text-emerald-200" }].map((stat) => (
                 <div key={stat.label} className="rounded-xl border border-white/10 bg-white/5 p-3">
                   <p className="text-[11px] uppercase tracking-wider text-slate-400">{stat.label}</p>
                   <p className={`mt-1 text-sm font-semibold ${stat.color}`}>{stat.val}</p>
@@ -594,9 +613,9 @@ export default function LinkedListVisualizerPage() {
             <span className="text-sm font-bold uppercase tracking-widest text-slate-200">{selectedLanguage} Source</span>
             <div className="ml-4 flex rounded-lg bg-white/5 p-1 border border-white/10">
               {["C++", "Python", "Java"].map((lang) => ( // Added Java to mapping
-                <button 
-                  key={lang} 
-                  onClick={() => setSelectedLanguage(lang)} 
+                <button
+                  key={lang}
+                  onClick={() => setSelectedLanguage(lang)}
                   className={`px-3 py-1 text-[10px] font-bold rounded-md transition-all ${selectedLanguage === lang ? "bg-blue-600 text-white" : "text-slate-400 hover:text-white"}`}
                 >
                   {lang}

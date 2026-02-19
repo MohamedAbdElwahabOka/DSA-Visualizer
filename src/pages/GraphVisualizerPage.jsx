@@ -17,6 +17,7 @@ import {
 } from 'lucide-react';
 import { dfsCPP, dfsJava, dfsPython, dfs } from '../algorithms/dfs';
 import { renderHighlightedCode } from '../utils/codeHighlight';
+import { useKeyboardShortcuts } from '../hooks/useKeyboardShortcuts';
 
 const runStatusStyleMap = {
     Idle: 'border-white/15 bg-white/5 text-slate-200',
@@ -240,6 +241,28 @@ export default function GraphVisualizerPage() {
             default: return 'stroke-slate-700 stroke-1';
         }
     };
+
+    useKeyboardShortcuts({
+        onSpace: () => {
+            if (isRunning) {
+                if (isPaused) {
+                    pauseSignal.current = false;
+                    setIsPaused(false);
+                    setRunStatus("Running");
+                } else {
+                    pauseSignal.current = true;
+                    setIsPaused(true);
+                    setRunStatus("Paused");
+                }
+            } else {
+                runDFS();
+            }
+        },
+        onReset: handleReset,
+        onNew: () => handleNewGraph(),
+        onSpeedUp: () => setSpeed((s) => Math.max(50, s - 50)),
+        onSpeedDown: () => setSpeed((s) => Math.min(800, s + 50)),
+    });
 
 
     return (

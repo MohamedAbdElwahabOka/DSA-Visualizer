@@ -31,6 +31,7 @@ import { insertionSort } from "../algorithms/insertionSort";
 import { dfs } from "../algorithms/dfs";
 import { interpolationSearch } from "../algorithms/interpolationSearch";
 import { renderHighlightedCode } from "../utils/codeHighlight";
+import { useKeyboardShortcuts } from "../hooks/useKeyboardShortcuts";
 
 const algorithmMap = {
   "Bubble Sort": {
@@ -260,29 +261,7 @@ export default function VisualizerPage({
     [algorithm?.category, themeColors],
   );
 
-  // HOTKEYS
-  useEffect(() => {
-    const handleHotkeys = (e) => {
-      const tag = e.target?.tagName?.toLowerCase();
-      if (tag === "input" || tag === "textarea") return;
-      if (e.code === "Space") {
-        e.preventDefault();
-        if (!isSorting) handleStart();
-        else if (isPaused) handleResume();
-        else handlePause();
-      }
-      if (e.key.toLowerCase() === "r") {
-        e.preventDefault();
-        handleResetHighlights();
-      }
-      if (e.key.toLowerCase() === "n") {
-        e.preventDefault();
-        handleGenerateNew();
-      }
-    };
-    window.addEventListener("keydown", handleHotkeys);
-    return () => window.removeEventListener("keydown", handleHotkeys);
-  }, [isSorting, isPaused]);
+
 
   useEffect(() => {
     handleGenerateNew(arraySize);
@@ -396,6 +375,24 @@ export default function VisualizerPage({
     link.download = `${name.replace(/\s+/g, "")}${ext}`;
     link.click();
   };
+
+  useKeyboardShortcuts({
+    onSpace: () => {
+      if (!isSorting) handleStart();
+      else if (isPaused) handleResume();
+      else handlePause();
+    },
+    onReset: handleResetHighlights,
+    onNew: handleGenerateNew,
+    onSpeedUp: () => setSpeed((s) => Math.max(1, s - 10)),
+    onSpeedDown: () => setSpeed((s) => Math.min(100, s + 10)),
+    onTheme: () => {
+      const keys = Object.keys(colorThemes);
+      setColorTheme(keys[(keys.indexOf(colorTheme) + 1) % keys.length]);
+    },
+    onValues: () => !isTooLargeForValues && setShowValues((v) => !v),
+    onGrid: () => setShowGrid((g) => !g),
+  });
 
   return (
     <div className="font-body relative mx-auto w-full max-w-7xl px-4 py-8 sm:px-6 sm:py-10 lg:py-12">
