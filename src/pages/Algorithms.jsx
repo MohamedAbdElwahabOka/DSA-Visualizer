@@ -12,6 +12,7 @@ import {
   Layers,
   Search,
   Sparkles,
+  Network,
   TimerReset,
   X,
   Zap,
@@ -104,6 +105,20 @@ const algorithmsCatalog = [
     accent: 'text-fuchsia-200',
   },
   {
+    id: 'merge-sort',
+    title: 'Merge Sort',
+    description:
+      'A divide and conquer algorithm that splits the array into halves, recursively sorts them, and merges them.',
+    path: '/visualizer/merge-sort',
+    category: 'sorting',
+    type: 'Divide & Conquer',
+    complexity: 'O(n log n)',
+    level: 'Intermediate',
+    icon: Layers,
+    gradient: 'from-indigo-500/25 via-blue-500/15 to-transparent',
+    accent: 'text-indigo-200',
+  },
+  {
     id: 'heap-sort',
     title: 'Heap Sort',
     description:
@@ -146,6 +161,19 @@ const algorithmsCatalog = [
     accent: 'text-violet-200',
   },
   {
+    id: 'prims',
+    title: "Prim's Algorithm",
+    description: 'Build a Minimum Spanning Tree by greedily adding the cheapest edge that connects a visited node to an unvisited node.',
+    path: '/visualizer/prims',
+    category: 'searching', // Or 'graphs' if you have it
+    type: 'MST',
+    complexity: 'O(E log V)',
+    level: 'Hard',
+    icon: Network,
+    gradient: 'from-emerald-500/25 via-teal-500/15 to-transparent',
+    accent: 'text-emerald-200',
+},
+  {
     id: 'depth-first-search',
     title: 'Depth First Search',
     description:
@@ -169,6 +197,20 @@ const algorithmsCatalog = [
     type: 'Greedy',
     complexity: 'O(E + V log V)',
     level: 'Advanced',
+    icon: Waypoints,
+    gradient: 'from-orange-500/25 via-amber-500/15 to-transparent',
+    accent: 'text-orange-200',
+  },
+  {
+    id: 'kruskal',
+    title: "Kruskal's Algorithm",
+    description:
+      "Finds a Minimum Spanning Tree (MST) for a connected weighted graph using a greedy approach.",
+    path: '/visualizer/kruskal',
+    category: 'pathfinding',
+    type: 'Greedy',
+    complexity: 'O(E log E)',
+    level: 'Intermediate',
     icon: Waypoints,
     gradient: 'from-orange-500/25 via-amber-500/15 to-transparent',
     accent: 'text-orange-200',

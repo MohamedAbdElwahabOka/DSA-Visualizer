@@ -1,3 +1,5 @@
+
+
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
@@ -8,7 +10,9 @@ import Contact from "./pages/Contact";
 import VisualizerPage from "./pages/VisualizerPage";
 import LinkedListVisualizerPage from "./pages/LinkedListVisualizerPage";
 import GraphVisualizerPage from "./pages/GraphVisualizerPage";
+import PrimsVisualizerPage from "./pages/PrimsVisualizerPage";
 import DijkstraPage from "./pages/DijkstraPage";
+import KruskalPage from "./pages/KruskalPage";
 import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
 
@@ -61,6 +65,13 @@ import {
   insertionSortPython,
   insertionSortJS,
 } from "./algorithms/insertionSort";
+import {
+  mergeSortCPP,
+  mergeSortJava,
+  mergeSortPython,
+  mergeSortJS,
+
+} from './algorithms/mergeSort';
 import { dfsCPP, dfsJava } from "./algorithms/dfs";
 
 export default function App() {
@@ -91,6 +102,7 @@ export default function App() {
                 />
               }
             />
+            <Route path="/visualizer/prims" element={<PrimsVisualizerPage />} />
             <Route
               path="/visualizer/selection-sort"
               element={
@@ -179,7 +191,17 @@ export default function App() {
               path="/visualizer/linked-list"
               element={<LinkedListVisualizerPage />}
             />
+            <Route
+              path="/visualizer/merge-sort"
+              element={<VisualizerPage name="Merge Sort"
+                cppSnippet={mergeSortCPP}
+                javaSnippet={mergeSortJava}
+                pythonSnippet={mergeSortPython}
+                jsSnippet={mergeSortJS}
+              />}
+            />
             <Route path="/visualizer/dijkstra" element={<DijkstraPage />} />
+            <Route path="/visualizer/kruskal" element={<KruskalPage />} />
             <Route path="/visualizer/dfs" element={<GraphVisualizerPage />} />
           </Routes>
         </main>

@@ -1,16 +1,11 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDocumentTitle } from "../hooks/useDocumentTitle";
-import { motion } from "framer-motion";
 import {
   Activity,
   Binary,
   CheckCheck,
   Clock3,
-  Play,
-  Pause,
-  RotateCcw,
-  Code2,
   Shuffle,
   Eye,
   EyeOff,
@@ -24,7 +19,6 @@ import {
 } from "lucide-react";
 import { useVisualizer } from "../hooks/useVisualizer";
 import { bubbleSort } from "../algorithms/bubbleSort";
-import { selectionSort } from "../algorithms/selectionSort";
 import { quickSort } from "../algorithms/quickSort";
 import { linearSearch } from "../algorithms/linearSearch";
 import { radixSort } from "../algorithms/radixSort";
@@ -125,6 +119,17 @@ const algorithmMap = {
     description:
       "Depth First Search traversal on an implicit Binary Tree structure.",
   },
+  'Merge Sort': {
+  run: mergeSort,
+  category: "Sorting",
+  best: "O(n log n)",
+  average: "O(n log n)",
+  worst: "O(n log n)",
+  space: "O(n)",
+  description:
+    "Merge Sort is a divide-and-conquer algorithm that splits the array into halves, recursively sorts them, and merges the sorted halves.",
+},
+// Add your algorithm name and function to the run parameter.
 };
 
 const statusStyleMap = {
