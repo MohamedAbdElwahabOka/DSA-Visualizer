@@ -4,6 +4,8 @@ import { motion } from 'framer-motion';
 import { RefreshCw, Play, Pause, RotateCcw, Code2 } from 'lucide-react';
 import { bubbleSort } from '../algorithms/bubbleSort';
 import { selectionSort } from '../algorithms/selectionSort';
+import { mergeSort } from '../algorithms/mergeSort';
+
 
 const algorithmMap = {
   'Bubble Sort': {
@@ -11,6 +13,9 @@ const algorithmMap = {
   },
   'Selection Sort': {
     run: selectionSort,
+  },
+  'Merge Sort': {
+    run: mergeSort,
   },
 // Add your algorithm name and function to the run parameter.
 };

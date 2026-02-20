@@ -7,6 +7,8 @@ import Contact from './pages/Contact';
 import VisualizerPage from './pages/VisualizerPage';
 import { bubbleSort, bubbleSortCPP } from './algorithms/bubbleSort';
 import { selectionSort , selectionSortCPP} from './algorithms/selectionSort';
+import { mergeSort, mergeSortCPP } from './algorithms/mergeSort';
+
 
 export default function App() {
   return (
@@ -29,6 +31,10 @@ export default function App() {
             <Route 
               path="/visualizer/selection-sort"
               element={<VisualizerPage name="Selection Sort" codeSnippet={selectionSortCPP} />}
+            />
+            <Route 
+              path="/visualizer/merge-sort"
+              element={<VisualizerPage name="Merge Sort" codeSnippet={mergeSortCPP} />} 
             />
           </Routes>
         </main>

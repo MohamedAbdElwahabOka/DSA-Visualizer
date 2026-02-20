@@ -14,7 +14,14 @@ export default function Algorithms() {
       title:"Selection Sort",
       description:"Selection sort repeatedly finds the smallest element in the unsorted part of the array and places it in its correct position. ",
       path: '/visualizer/selection-sort'
+    },
+    {
+      id: 'merge-sort',
+      title: 'Merge Sort',
+      description: 'A divide and conquer algorithm that divides the array into halves, recursively sorts them, and merges them.',
+      path: '/visualizer/merge-sort'
     }
+    
     // Future algorithms can be added here easily!
   ];
 
