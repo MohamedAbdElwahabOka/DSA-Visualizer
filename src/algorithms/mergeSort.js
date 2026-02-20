@@ -179,3 +179,189 @@ int main() {
 
     return 0;
 }`;
+export const mergeSortPython = `def merge(arr, left, mid, right):
+    n1 = mid - left + 1
+    n2 = right - mid
+
+    L = arr[left:mid + 1]
+    R = arr[mid + 1:right + 1]
+
+    i = 0
+    j = 0
+    k = left
+
+    while i < n1 and j < n2:
+        if L[i] <= R[j]:
+            arr[k] = L[i]
+            i += 1
+        else:
+            arr[k] = R[j]
+            j += 1
+        k += 1
+
+    while i < n1:
+        arr[k] = L[i]
+        i += 1
+        k += 1
+
+    while j < n2:
+        arr[k] = R[j]
+        j += 1
+        k += 1
+
+
+def mergeSort(arr, left, right):
+    if left < right:
+        mid = left + (right - left) // 2
+
+        mergeSort(arr, left, mid)
+        mergeSort(arr, mid + 1, right)
+
+        merge(arr, left, mid, right)
+
+
+if __name__ == "__main__":
+    n = int(input("Enter number of elements: "))
+    arr = list(map(int, input().split()))
+
+    mergeSort(arr, 0, n - 1)
+
+    print("Sorted array:")
+    print(*arr)
+`;
+export const mergeSortJava = `import java.util.Scanner;
+
+public class MergeSort {
+
+    static void merge(int arr[], int left, int mid, int right) {
+        int n1 = mid - left + 1;
+        int n2 = right - mid;
+
+        int L[] = new int[n1];
+        int R[] = new int[n2];
+
+        for (int i = 0; i < n1; i++)
+            L[i] = arr[left + i];
+
+        for (int j = 0; j < n2; j++)
+            R[j] = arr[mid + 1 + j];
+
+        int i = 0, j = 0, k = left;
+
+        while (i < n1 && j < n2) {
+            if (L[i] <= R[j]) {
+                arr[k] = L[i];
+                i++;
+            } else {
+                arr[k] = R[j];
+                j++;
+            }
+            k++;
+        }
+
+        while (i < n1) {
+            arr[k] = L[i];
+            i++;
+            k++;
+        }
+
+        while (j < n2) {
+            arr[k] = R[j];
+            j++;
+            k++;
+        }
+    }
+
+    static void mergeSort(int arr[], int left, int right) {
+        if (left < right) {
+            int mid = left + (right - left) / 2;
+
+            mergeSort(arr, left, mid);
+            mergeSort(arr, mid + 1, right);
+
+            merge(arr, left, mid, right);
+        }
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter number of elements: ");
+        int n = sc.nextInt();
+
+        int arr[] = new int[n];
+
+        for (int i = 0; i < n; i++)
+            arr[i] = sc.nextInt();
+
+        mergeSort(arr, 0, n - 1);
+
+        System.out.println("Sorted array:");
+        for (int i = 0; i < n; i++)
+            System.out.print(arr[i] + " ");
+
+        sc.close();
+    }
+}`;
+export const mergeSortJS = `function merge(arr, left, mid, right) {
+  const n1 = mid - left + 1;
+  const n2 = right - mid;
+
+  const L = arr.slice(left, mid + 1);
+  const R = arr.slice(mid + 1, right + 1);
+
+  let i = 0, j = 0, k = left;
+
+  while (i < n1 && j < n2) {
+      if (L[i] <= R[j]) {
+          arr[k] = L[i];
+          i++;
+      } else {
+          arr[k] = R[j];
+          j++;
+      }
+      k++;
+  }
+
+  while (i < n1) {
+      arr[k] = L[i];
+      i++;
+      k++;
+  }
+
+  while (j < n2) {
+      arr[k] = R[j];
+      j++;
+      k++;
+  }
+}
+
+function mergeSort(arr, left, right) {
+  if (left < right) {
+      const mid = Math.floor(left + (right - left) / 2);
+
+      mergeSort(arr, left, mid);
+      mergeSort(arr, mid + 1, right);
+
+      merge(arr, left, mid, right);
+  }
+}
+
+// Example usage
+const readline = require("readline");
+
+const rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout
+});
+
+rl.question("Enter numbers separated by space: ", (input) => {
+  const arr = input.split(" ").map(Number);
+
+  mergeSort(arr, 0, arr.length - 1);
+
+  console.log("Sorted array:");
+  console.log(arr.join(" "));
+  rl.close();
+});
+`;

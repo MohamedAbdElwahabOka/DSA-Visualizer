@@ -1,5 +1,4 @@
 
-import { mergeSortCPP } from './algorithms/mergeSort';
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
@@ -64,6 +63,12 @@ import {
   insertionSortPython,
   insertionSortJS,
 } from "./algorithms/insertionSort";
+import { mergeSortCPP,
+  mergeSortJava,
+  mergeSortPython,
+  mergeSortJS,
+
+} from './algorithms/mergeSort';
 import { dfsCPP, dfsJava } from "./algorithms/dfs";
 
 export default function App() {
@@ -184,7 +189,12 @@ export default function App() {
             />
             <Route 
               path="/visualizer/merge-sort"
-              element={<VisualizerPage name="Merge Sort" codeSnippet={mergeSortCPP} />} 
+              element={<VisualizerPage name="Merge Sort" 
+                cppSnippet={mergeSortCPP}
+                javaSnippet={mergeSortJava}
+                pythonSnippet={mergeSortPython}
+                jsSnippet={mergeSortJS}
+                 />} 
             />
             <Route path="/visualizer/dijkstra" element={<DijkstraPage />} />
             <Route path="/visualizer/dfs" element={<GraphVisualizerPage />} />
