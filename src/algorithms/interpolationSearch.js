@@ -153,3 +153,45 @@ if __name__ == "__main__":
     target = 18
     index = interpolation_search(arr, len(arr), target)
     print(f"Element found at index {index}" if index != -1 else "Not found")`;
+
+export const interpolationSearchJS = `// Interpolation Search Implementation in JavaScript
+function interpolationSearch(arr, target) {
+    let low = 0;
+    let high = arr.length - 1;
+
+    while (low <= high && target >= arr[low] && target <= arr[high]) {
+        if (low === high) {
+            if (arr[low] === target) return low;
+            return -1;
+        }
+
+        // Interpolation formula to estimate position
+        const pos = low + Math.floor(
+            ((high - low) / (arr[high] - arr[low])) * (target - arr[low])
+        );
+
+        if (arr[pos] === target) {
+            return pos;
+        }
+
+        if (arr[pos] < target) {
+            low = pos + 1;
+        } else {
+            high = pos - 1;
+        }
+    }
+
+    return -1; // Element not found
+}
+
+// Example usage
+const arr = [10, 12, 13, 16, 18, 19, 20, 21, 22, 23, 24, 33, 35, 42, 47];
+const target = 18;
+
+const result = interpolationSearch(arr, target);
+
+if (result !== -1) {
+    console.log(\"Element found at index:\", result);
+} else {
+    console.log(\"Element not found\");
+}`;

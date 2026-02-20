@@ -117,3 +117,29 @@ if __name__ == "__main__":
     arr = list(map(int, input("Enter elements: ").split()))
     insertion_sort(arr)
     print("Sorted array:", *arr)`;
+
+export const insertionSortJS = `// Insertion Sort Implementation in JavaScript
+function insertionSort(arr) {
+    const n = arr.length;
+
+    for (let i = 1; i < n; i++) {
+        const key = arr[i];
+        let j = i - 1;
+
+        // Move elements greater than key one position ahead
+        while (j >= 0 && arr[j] > key) {
+            arr[j + 1] = arr[j];
+            j--;
+        }
+        arr[j + 1] = key;
+    }
+
+    return arr;
+}
+
+// Example usage
+const arr = [12, 11, 13, 5, 6];
+console.log(\"Original array:\", arr);
+
+insertionSort(arr);
+console.log(\"Sorted array:\", arr);`;

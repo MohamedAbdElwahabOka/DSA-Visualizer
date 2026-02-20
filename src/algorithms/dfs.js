@@ -113,6 +113,35 @@ def main():
 if __name__ == "__main__":
     main()`;
 
+export const dfsJS = `// DFS (Depth-First Search) Implementation in JavaScript
+function dfs(node, adj, visited, result = []) {
+    visited[node] = true;
+    result.push(node); // Process node
+
+    for (const neighbor of adj[node]) {
+        if (!visited[neighbor]) {
+            dfs(neighbor, adj, visited, result);
+        }
+    }
+
+    return result;
+}
+
+// Example usage
+const V = 5; // Number of vertices
+const adj = Array.from({ length: V }, () => []);
+
+// Add edges (undirected graph)
+const edges = [[0, 1], [0, 2], [1, 3], [1, 4], [2, 4]];
+edges.forEach(([u, v]) => {
+    adj[u].push(v);
+    adj[v].push(u);
+});
+
+const visited = new Array(V).fill(false);
+const traversal = dfs(0, adj, visited);
+console.log(\"DFS Traversal:\", traversal.join(\" \"));`;
+
 // The 'dfs' export is kept for compatibility if needed, 
 // but is not used by GraphVisualizerPage
 export const dfs = async () => { };

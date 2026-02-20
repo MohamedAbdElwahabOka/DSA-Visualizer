@@ -111,3 +111,25 @@ if __name__ == "__main__":
         print(f"Element found at index: {result}")
     else:
         print("Element not found")`;
+
+export const linearSearchJS = `// Linear Search Implementation in JavaScript
+function linearSearch(arr, target) {
+    for (let i = 0; i < arr.length; i++) {
+        if (arr[i] === target) {
+            return i; // Element found at index i
+        }
+    }
+    return -1; // Element not found
+}
+
+// Example usage
+const arr = [10, 50, 30, 70, 80, 20];
+const target = 30;
+
+const result = linearSearch(arr, target);
+
+if (result !== -1) {
+    console.log(\"Element found at index:\", result);
+} else {
+    console.log(\"Element not found\");
+}`;

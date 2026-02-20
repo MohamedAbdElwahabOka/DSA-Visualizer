@@ -15,7 +15,7 @@ import {
     Shuffle,
     Network,
 } from 'lucide-react';
-import { dfsCPP, dfsJava, dfsPython, dfs } from '../algorithms/dfs';
+import { dfsCPP, dfsJava, dfsPython, dfsJS, dfs } from '../algorithms/dfs';
 import { renderHighlightedCode } from '../utils/codeHighlight';
 import { useKeyboardShortcuts } from '../hooks/useKeyboardShortcuts';
 
@@ -89,7 +89,7 @@ export default function GraphVisualizerPage() {
     const [selectedLanguage, setSelectedLanguage] = useState("C++");
     const [copyState, setCopyState] = useState("idle");
 
-    const activeCode = selectedLanguage === "C++" ? dfsCPP : (selectedLanguage === "Java" ? dfsJava : dfsPython);
+    const activeCode = selectedLanguage === "C++" ? dfsCPP : (selectedLanguage === "Java" ? dfsJava : (selectedLanguage === "Python" ? dfsPython : dfsJS));
 
     // Canvas Refs
     const containerRef = useRef(null);
@@ -356,7 +356,7 @@ export default function GraphVisualizerPage() {
                         <Code2 size={20} className="text-purple-400" />
                         <span className="text-sm font-bold uppercase tracking-widest text-slate-200">{selectedLanguage} Source</span>
                         <div className="ml-4 flex rounded-lg bg-white/5 p-1 border border-white/10">
-                            {["C++", "Java", "Python"].map((lang) => (
+                            {["C++", "Java", "Python", "JavaScript"].map((lang) => (
                                 <button key={lang} onClick={() => setSelectedLanguage(lang)} className={`px-3 py-1 text-[10px] font-bold rounded-md transition-all ${selectedLanguage === lang ? "bg-purple-600 text-white" : "text-slate-400 hover:text-white"}`}>
                                     {lang}
                                 </button>

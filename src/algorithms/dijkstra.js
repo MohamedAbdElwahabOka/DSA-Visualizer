@@ -132,6 +132,93 @@ def dijkstra(start, n, adj):
             print(dist[i], end=" ")
 `;
 
+export const dijkstraJS = `// Dijkstra's Algorithm Implementation in JavaScript
+class MinHeap {
+    constructor() {
+        this.heap = [];
+    }
+
+    push(node) {
+        this.heap.push(node);
+        this.bubbleUp(this.heap.length - 1);
+    }
+
+    pop() {
+        if (this.heap.length === 0) return null;
+        const min = this.heap[0];
+        const last = this.heap.pop();
+        if (this.heap.length > 0) {
+            this.heap[0] = last;
+            this.bubbleDown(0);
+        }
+        return min;
+    }
+
+    bubbleUp(idx) {
+        while (idx > 0) {
+            const parent = Math.floor((idx - 1) / 2);
+            if (this.heap[parent].dist <= this.heap[idx].dist) break;
+            [this.heap[parent], this.heap[idx]] = [this.heap[idx], this.heap[parent]];
+            idx = parent;
+        }
+    }
+
+    bubbleDown(idx) {
+        const length = this.heap.length;
+        while (true) {
+            const left = 2 * idx + 1;
+            const right = 2 * idx + 2;
+            let smallest = idx;
+            if (left < length && this.heap[left].dist < this.heap[smallest].dist) smallest = left;
+            if (right < length && this.heap[right].dist < this.heap[smallest].dist) smallest = right;
+            if (smallest === idx) break;
+            [this.heap[smallest], this.heap[idx]] = [this.heap[idx], this.heap[smallest]];
+            idx = smallest;
+        }
+    }
+
+    isEmpty() {
+        return this.heap.length === 0;
+    }
+}
+
+function dijkstra(start, n, adj) {
+    const INF = Infinity;
+    const dist = new Array(n).fill(INF);
+    const pq = new MinHeap();
+
+    dist[start] = 0;
+    pq.push({ id: start, dist: 0 });
+
+    while (!pq.isEmpty()) {
+        const { id: u, dist: d } = pq.pop();
+
+        if (d > dist[u]) continue;
+
+        for (const { to, weight } of adj[u]) {
+            if (dist[u] + weight < dist[to]) {
+                dist[to] = dist[u] + weight;
+                pq.push({ id: to, dist: dist[to] });
+            }
+        }
+    }
+
+    return dist;
+}
+
+// Example usage
+const n = 5;
+const adj = Array.from({ length: n }, () => []);
+
+// Add edges: [from, to, weight]
+const edges = [[0, 1, 4], [0, 2, 1], [2, 1, 2], [1, 3, 1], [2, 3, 5], [3, 4, 3]];
+edges.forEach(([u, v, w]) => {
+    adj[u].push({ to: v, weight: w });
+});
+
+const distances = dijkstra(0, n, adj);
+console.log(\"Shortest distances from node 0:\", distances);`;
+
 export const generateDijkstraSteps = (nodes, edges, startNodeId) => {
     const steps = [];
     const adjacencyList = {};

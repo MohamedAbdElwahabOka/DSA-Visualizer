@@ -288,3 +288,63 @@ if __name__ == "__main__":
     arr = list(map(int, input("Enter elements: ").split()))
     radix_sort(arr)
     print("Sorted array:", *arr)`;
+
+export const radixSortJS = `// Radix Sort Implementation in JavaScript
+function getMax(arr) {
+    let max = arr[0];
+    for (let i = 1; i < arr.length; i++) {
+        if (arr[i] > max) {
+            max = arr[i];
+        }
+    }
+    return max;
+}
+
+function countingSort(arr, exp) {
+    const n = arr.length;
+    const output = new Array(n);
+    const count = new Array(10).fill(0);
+
+    // Store count of occurrences
+    for (let i = 0; i < n; i++) {
+        const digit = Math.floor(arr[i] / exp) % 10;
+        count[digit]++;
+    }
+
+    // Change count[i] to actual position
+    for (let i = 1; i < 10; i++) {
+        count[i] += count[i - 1];
+    }
+
+    // Build the output array
+    for (let i = n - 1; i >= 0; i--) {
+        const digit = Math.floor(arr[i] / exp) % 10;
+        output[count[digit] - 1] = arr[i];
+        count[digit]--;
+    }
+
+    // Copy output array to arr
+    for (let i = 0; i < n; i++) {
+        arr[i] = output[i];
+    }
+}
+
+function radixSort(arr) {
+    if (arr.length === 0) return arr;
+
+    const max = getMax(arr);
+
+    // Do counting sort for every digit
+    for (let exp = 1; Math.floor(max / exp) > 0; exp *= 10) {
+        countingSort(arr, exp);
+    }
+
+    return arr;
+}
+
+// Example usage
+const arr = [170, 45, 75, 90, 802, 24, 2, 66];
+console.log(\"Original array:\", arr);
+
+radixSort(arr);
+console.log(\"Sorted array:\", arr);`;

@@ -1,15 +1,14 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import React, { useEffect, useState, useRef, useMemo } from 'react';
+import { motion } from 'framer-motion';
+import { RefreshCw, Play, Pause, RotateCcw, Code2 } from 'lucide-react';
+import { selectionSort } from '../algorithms/selectionSort';
+import { mergeSort } from '../algorithms/mergeSort';
 import { useDocumentTitle } from "../hooks/useDocumentTitle";
-import { motion } from "framer-motion";
 import {
   Activity,
   Binary,
   CheckCheck,
   Clock3,
-  Play,
-  Pause,
-  RotateCcw,
-  Code2,
   Shuffle,
   Eye,
   EyeOff,
@@ -22,7 +21,6 @@ import {
 } from "lucide-react";
 import { useVisualizer } from "../hooks/useVisualizer";
 import { bubbleSort } from "../algorithms/bubbleSort";
-import { selectionSort } from "../algorithms/selectionSort";
 import { quickSort } from "../algorithms/quickSort";
 import { linearSearch } from "../algorithms/linearSearch";
 import { radixSort } from "../algorithms/radixSort";
@@ -38,8 +36,8 @@ const algorithmMap = {
     run: bubbleSort,
     category: "Sorting",
     best: "O(n)",
-    average: "O(n^2)",
-    worst: "O(n^2)",
+    average: "O(n²)",
+    worst: "O(n²)",
     space: "O(1)",
     description:
       "Bubble Sort compares adjacent bars and swaps them until larger values settle at the end.",
@@ -47,9 +45,9 @@ const algorithmMap = {
   "Selection Sort": {
     run: selectionSort,
     category: "Sorting",
-    best: "O(n^2)",
-    average: "O(n^2)",
-    worst: "O(n^2)",
+    best: "O(n²)",
+    average: "O(n²)",
+    worst: "O(n²)",
     space: "O(1)",
     description:
       "Selection Sort repeatedly chooses the smallest unsorted value and places it into position.",
@@ -59,7 +57,7 @@ const algorithmMap = {
     category: "Sorting",
     best: "O(n log n)",
     average: "O(n log n)",
-    worst: "O(n^2)",
+    worst: "O(n²)",
     space: "O(log n)",
     description:
       "Quick Sort partitions around a pivot and recursively solves left and right subarrays.",
@@ -98,8 +96,8 @@ const algorithmMap = {
     run: insertionSort,
     category: "Sorting",
     best: "O(n)",
-    average: "O(n^2)",
-    worst: "O(n^2)",
+    average: "O(n²)",
+    worst: "O(n²)",
     space: "O(1)",
     description:
       "Insertion Sort builds the final sorted array one item at a time by shifting larger elements to the right.",
@@ -124,6 +122,17 @@ const algorithmMap = {
     description:
       "Depth First Search traversal on an implicit Binary Tree structure.",
   },
+  'Merge Sort': {
+  run: mergeSort,
+  category: "Sorting",
+  best: "O(n log n)",
+  average: "O(n log n)",
+  worst: "O(n log n)",
+  space: "O(n)",
+  description:
+    "Merge Sort is a divide-and-conquer algorithm that splits the array into halves, recursively sorts them, and merges the sorted halves.",
+},
+// Add your algorithm name and function to the run parameter.
 };
 
 const statusStyleMap = {
@@ -185,6 +194,7 @@ export default function VisualizerPage({
   cppSnippet,
   javaSnippet,
   pythonSnippet,
+  jsSnippet,
 }) {
   const { array, setArray, generateRandomArray } = useVisualizer();
   useDocumentTitle(name);
@@ -212,7 +222,9 @@ export default function VisualizerPage({
       ? cppSnippet
       : selectedLanguage === "Java"
         ? javaSnippet
-        : pythonSnippet;
+        : selectedLanguage === "Python"
+          ? pythonSnippet
+          : jsSnippet;
 
   const themeConfig = colorThemes[colorTheme] ?? colorThemes.ocean;
   const themeColors = themeConfig.colors;
@@ -659,7 +671,7 @@ export default function VisualizerPage({
               {selectedLanguage} Source
             </span>
             <div className="ml-4 flex rounded-lg bg-white/5 p-1 border border-white/10">
-              {["C++", "Java", "Python"].map((lang) => (
+              {["C++", "Java", "Python", "JavaScript"].map((lang) => (
                 <button
                   key={lang}
                   onClick={() => setSelectedLanguage(lang)}

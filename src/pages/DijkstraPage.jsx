@@ -16,7 +16,7 @@ import {
     Waypoints,
     Flag
 } from 'lucide-react';
-import { dijkstraCPP, dijkstraJava, dijkstraPython, generateDijkstraSteps } from '../algorithms/dijkstra';
+import { dijkstraCPP, dijkstraJava, dijkstraPython, dijkstraJS, generateDijkstraSteps } from '../algorithms/dijkstra';
 import { renderHighlightedCode } from '../utils/codeHighlight';
 
 const CANVAS_WIDTH = 800;
@@ -89,7 +89,7 @@ export default function DijkstraPage() {
 
     const timerRef = useRef(null);
 
-    const activeCode = selectedLanguage === "C++" ? dijkstraCPP : (selectedLanguage === "Java" ? dijkstraJava : dijkstraPython);
+    const activeCode = selectedLanguage === "C++" ? dijkstraCPP : (selectedLanguage === "Java" ? dijkstraJava : (selectedLanguage === "Python" ? dijkstraPython : dijkstraJS));
 
     // Derived state from current step
     const currentStep = useMemo(() => {
@@ -460,7 +460,7 @@ export default function DijkstraPage() {
                             {selectedLanguage} Source
                         </span>
                         <div className="ml-4 flex rounded-lg bg-white/5 p-1 border border-white/10">
-                            {["C++", "Java", "Python"].map((lang) => (
+                            {["C++", "Java", "Python", "JavaScript"].map((lang) => (
                                 <button
                                     key={lang}
                                     onClick={() => setSelectedLanguage(lang)}
